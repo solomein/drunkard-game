@@ -1,0 +1,74 @@
+.text-right {
+	text-align: right;
+}
+
+.text-left {
+	text-align: left;
+}
+
+.text-center {
+	text-align: center;
+}
+
+.float-left {
+	float: left;
+}
+
+.float-right {
+	float: right;
+}
+
+@card-back-color: #393331;
+
+.cards-container > div {
+	float: left;
+}
+
+.card {
+	width: 100px;
+	margin: 10px;
+	padding: 10px;
+	border-radius: 3px;
+	border: 1px solid #dadada;
+	.card_suit {
+		font-size: 2.5em;
+		height: 110px;
+		line-height: 110px;
+		.suit-red {
+			color: red;
+		}
+		.suit-black {
+			color: black;
+		}
+	}
+	.card_name {
+		height: 16px;
+		line-height: 16px;
+	}
+	&.card-back {
+		color: white;
+		background:
+		linear-gradient(27deg, lighten(@card-back-color, 8%) 5px, transparent 5px) 0 5px,
+		linear-gradient(207deg, lighten(@card-back-color, 8%) 5px, transparent 5px) 10px 0px,
+		linear-gradient(27deg, lighten(@card-back-color, 13%) 5px, transparent 5px) 0px 10px,
+		linear-gradient(207deg, lighten(@card-back-color, 13%) 5px, transparent 5px) 10px 5px,
+		linear-gradient(90deg, lighten(@card-back-color, 11%) 10px, transparent 10px),
+		linear-gradient(lighten(@card-back-color, 11%) 25%, lighten(@card-back-color, 10%) 25%, lighten(@card-back-color, 10%) 50%, transparent 50%, transparent 75%, lighten(@card-back-color, 14%) 75%, lighten(@card-back-color, 14%));
+		background-color: lighten(@card-back-color, 7%);
+		background-size: 20px 20px;
+
+		box-shadow: 0 0 0 10px rgba(255, 255, 255, 0.25) inset;
+	}
+}
+
+.group {
+	zoom: 1; /* For IE */
+	&:before,
+	&:after {
+	    content: "";
+    	display: table;
+	}
+	&:after {
+		clear: both;
+	}
+}

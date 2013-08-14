@@ -1,0 +1,11 @@
+{
+  "name": "drunkard-game",
+  "version": "0.0.1",
+  "devDependencies": {
+    "grunt": "latest",
+    "grunt-contrib-less": "latest",
+    "grunt-contrib-requirejs": "latest",
+    "grunt-contrib-copy": "latest",
+    "grunt-contrib-jshint": "latest"
+  }
+}
