@@ -16,7 +16,7 @@ define(function(require) {
 
 		events: {
 			'change #control_players-count': 'changePlayers',
-			'click #control_new-game': 'newGame'
+			'click #control_new-game': 'changePlayers'
 		},
 
 		ui: {
@@ -24,10 +24,6 @@ define(function(require) {
 		},
 
 		changePlayers: function(ev) {
-			this.trigger('control:changePlayers', ev.currentTarget.value)
-		},
-
-		newGame: function(ev) {
 			this.trigger('control:changePlayers', this.ui.playersCount.val())
 		}
 

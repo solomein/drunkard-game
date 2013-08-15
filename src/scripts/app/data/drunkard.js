@@ -1,6 +1,7 @@
 define(function(require) {
 
-	var Config = require('./config')
+	var ES = require('es5')
+	  , Config = require('./config')
 	  , Service = require('./cards_generate_service')
 	  ;
 

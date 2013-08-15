@@ -36,6 +36,7 @@ require.config({
 		'backbone.relational':		'./vendor/backbone/backbone.relational',
 		'backbone.picky': 			'./vendor/backbone/backbone.picky',
 		'text': 					'./vendor/require/require.text',
+		'es5': 						'./vendor/es5-shim/es5-shim'
 	}
 });
 
