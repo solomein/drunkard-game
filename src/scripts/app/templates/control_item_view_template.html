@@ -3,10 +3,11 @@
 		<% _.each(playersCounts, function(v) { %>
 			<option><%= v %></option>
 		<% }); %>
-
-
 	</select>
 	<button type="button" id="control_play">Сделать ход</button>
 	<button type="button" id="control_auto-play">Сыграть автоматически</button>
 	<button type="button" id="control_new-game">Новая игра</button>
+	<label>
+		<input type="checkbox" id="control_debug"/> Вывод в консоль
+	</label>
 </div>

@@ -9,40 +9,41 @@ define(function(require) {
     , Drunkard = require('app/data/drunkard')
     ;
 
-  var drunkard = new Drunkard(2);
-  var playersCollection = new PlayersCollection;
+  var drunkard = new Drunkard(2)
+    , playersCollection = new PlayersCollection()
+    ;
 
   var playersView = new PlayersView({ collection: playersCollection })
     , controlView = new ControlView({ model: new ControlModel })
-    , gameLayout = new GameLayout
+    , gameLayout = new GameLayout()
     ;
 
   playersCollection.reset(drunkard.presenter)
 
   controlView.on('control:play', function () {
-    drunkard.play(1)
-    playersCollection.reset(drunkard.presenter)
-  })
+      drunkard.play(1)
+      playersCollection.reset(drunkard.presenter)
+  });
 
   controlView.on('control:autoPlay', function () {
-    drunkard.play()
-    playersCollection.reset(drunkard.presenter)
-  })
+      drunkard.play()
+      playersCollection.reset(drunkard.presenter)
+  });
 
-   controlView.on('control:changePlayers', function (count) {
-     drunkard = new Drunkard(count);
-     playersCollection.reset(drunkard.presenter)
-   })
+  controlView.on('control:changePlayers', function (count) {
+      drunkard = new Drunkard(count);
+      playersCollection.reset(drunkard.presenter)
+  });
 
   gameLayout.on('show', function () {
-    gameLayout.playersRegion.show(playersView)
-    gameLayout.controlRegion.show(controlView)
-  })
+      gameLayout.playersRegion.show(playersView)
+      gameLayout.controlRegion.show(controlView)
+  });
 
   return {
-    init: function() {
-      Bus.events.trigger('app:show:gameRegion', gameLayout)
-    }
+      init: function() {
+          Bus.events.trigger('app:show:gameRegion', gameLayout)
+      }
   }
 
 });

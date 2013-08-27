@@ -23,7 +23,9 @@ define(function(require) {
 			return _.range(this.fullDeck ? 2 : 6, 15);
 		},
 
-		maxIterationCount: 5000
-	}
+		maxIterationCount: 5000,
+
+		debug: false
+	};
 
 });

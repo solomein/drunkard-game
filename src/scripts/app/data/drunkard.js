@@ -3,6 +3,7 @@ define(function(require) {
 	var ES = require('es5')
 	  , Config = require('./config')
 	  , Service = require('./cards_generate_service')
+	  , Debug = require('./debug')
 	  ;
 
 	function Drunkard(playersCount) {
@@ -11,7 +12,7 @@ define(function(require) {
 		this.losers = [];
 		this.winners = [];
 		this.pulledCards = [];
-		this.presenter = this.initPresenter()
+		this.presenter = this.initPresenter();
 	}
 
 	Drunkard.prototype = {
@@ -30,6 +31,8 @@ define(function(require) {
 		pullCards: function() {
 			var belligerents = this.winners;
 
+			this.manual && belligerents.length && Debug.log('-> Воюют игроки ', belligerents);
+
 			var max = -1;
 
 			for (var i = 0; i < this.playersCount; i++) {
@@ -44,7 +47,9 @@ define(function(require) {
 					continue;
 				}
 
-				var cards = currentPlayer.splice(0, belligerents.length ? 2 : 1);		
+				var cards = currentPlayer.splice(0, belligerents.length ? 2 : 1);	
+
+				this.manual && Debug.log('Игрок ', i, ' тянет карты ', _.pluck(cards, 'name'));	
 
 				this.pulledCards = this.pulledCards.concat(cards);
 
@@ -65,28 +70,35 @@ define(function(require) {
 		},
 
 		play: function(count) {
+			this.manual = !!count;
 			count || (count = Config.maxIterationCount);
+
 			for (var i = 0; i < count; i++) {
 				this.pullCards();
 
 				if(i === count - 1) {
 					for (var j = 0; j < this.playersCount; j++) {
-						this.presenter[j].deckSize = this.deck.cards[j].length
+						this.presenter[j].deckSize = this.deck.cards[j].length;
 					}
 				}
 
 				if(this.winners.length === 1) {
 					var winner = this.winners[0];
 
-					Array.prototype.push.apply(this.deck.cards[winner], this.pulledCards.splice(0))
+					this.manual && Debug.log('-> Карты забирает Игрок ', winner);
+
+					Array.prototype.push.apply(this.deck.cards[winner], this.pulledCards.splice(0));
 					
 					if(this.deck.cards[winner].length === this.deck.size) {
-						this.presenter = this.initPresenter()
+						this.presenter = this.initPresenter();
+						Debug.log('Игра окончена! Количество сделанных ходов ', i);
 						break;
 					}
 
 					this.winners.length = 0;
 				}
+
+				i === Config.maxIterationCount - 1 && Debug.log('Игра затянулась. Количество сделанных ходов ', i);
 			}
 		}
 	}
